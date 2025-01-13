@@ -7,10 +7,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Report } from "./data";
+import { Report, reports } from "./data";
 import Link from "next/link";
 
-export const NavSetting = ({ projects: reports }: { projects: Report[] }) => {
+export const NavSetting = () => {
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Reports</SidebarGroupLabel>

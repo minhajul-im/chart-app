@@ -16,15 +16,15 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { Item } from "./data";
+import { Item, navItems } from "./data";
 import Link from "next/link";
 
-export const NavMain = ({ items }: { items: Item[] }) => {
+export const NavItems = () => {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item: Item) => (
+        {navItems.map((item: Item) => (
           <Collapsible
             key={item.title}
             asChild

@@ -9,10 +9,9 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { TeamSwitcher } from "./team-switcher";
-import { NavMain } from "./nav-main";
+import { NavItems } from "./nav-items";
 import { NavSetting } from "./nav-settings";
 import { NavUser } from "./nav-user";
-import { data } from "./data";
 import { ScrollArea } from "../ui/scroll-area";
 
 export const AppSidebar = ({
@@ -21,16 +20,16 @@ export const AppSidebar = ({
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher />
       </SidebarHeader>
       <SidebarContent>
         <ScrollArea>
-          <NavMain items={data.navMain} />
-          <NavSetting projects={data.reports} />
+          <NavItems />
+          <NavSetting />
         </ScrollArea>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

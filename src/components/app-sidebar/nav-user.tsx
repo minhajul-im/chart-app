@@ -6,9 +6,10 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
-  Sparkles,
 } from "lucide-react";
-
+import * as React from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -25,10 +26,17 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { User } from "./data";
+import { user } from "./data";
 
-export const NavUser = ({ user }: { user: User }) => {
+export const NavUser = () => {
   const { isMobile } = useSidebar();
+  const { theme, setTheme } = useTheme();
+
+  React.useEffect(() => {
+    if (!theme) {
+      setTheme("system");
+    }
+  }, [theme, setTheme]);
 
   return (
     <SidebarMenu>
@@ -66,14 +74,22 @@ export const NavUser = ({ user }: { user: User }) => {
                 </div>
               </div>
             </DropdownMenuLabel>
+
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
+              <span
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                <DropdownMenuItem>
+                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                  <span className="sr-only">Toggle theme</span>
+                  {theme === "dark" ? "Light " : "Dark "} Theme
+                </DropdownMenuItem>
+              </span>
             </DropdownMenuGroup>
+
             <DropdownMenuSeparator />
+
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />

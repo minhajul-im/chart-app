@@ -17,9 +17,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Team } from "./data";
+import { Team, teams } from "./data";
 
-export const TeamSwitcher = ({ teams }: { teams: Team[] }) => {
+export const TeamSwitcher = () => {
   const { isMobile } = useSidebar();
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
