@@ -1,5 +1,5 @@
 import React from "react";
 
 export const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return <div className="border-b mb-10">Dashboard</div>;
 };
