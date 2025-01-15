@@ -15,8 +15,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signupSchema } from "@/schema";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { axiosInstance } from "@/lib/axios";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const initialValue = {
   name: "",
@@ -25,6 +35,8 @@ const initialValue = {
 };
 
 export const SignUp = () => {
+  const router = useRouter();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
     defaultValues: initialValue,
@@ -32,18 +44,31 @@ export const SignUp = () => {
 
   const onSubmit = async (values: z.infer<typeof signupSchema>) => {
     try {
-      console.log(values);
-      form.reset();
+      const res = await axiosInstance.post("/signup", values);
+
+      if (res.status === 200) {
+        form.reset();
+        toast({ description: "Sign up successful!" });
+        router.push("/signin");
+      } else {
+        toast({ description: res?.data?.error, variant: "destructive" });
+      }
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        toast({
+          description: "An unexpected error occurred.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
   return (
     <main className="flex justify-center items-center h-screen">
-      <Card className="w-[40px]">
+      <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Sign up</CardTitle>
+          <CardDescription>Please enter your necessary! </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -96,6 +121,14 @@ export const SignUp = () => {
             </form>
           </Form>
         </CardContent>
+        <CardFooter>
+          <CardDescription>
+            You have already an account!
+            <Link className="text-blue-600 pl-3 underline" href="/signin">
+              Sing in
+            </Link>
+          </CardDescription>
+        </CardFooter>
       </Card>
     </main>
   );
