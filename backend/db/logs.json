@@ -1,0 +1,20 @@
+[
+  {
+    "ip": "127.0.0.1",
+    "userAgent": "Brave",
+    "time": "2025-06-16T17:14:25.330Z",
+    "visitedCount": 1,
+    "id": "30358967-f7c3-44b2-b77d-ce22c0895de5",
+    "createdAt": "2025-06-16T17:14:25.331Z",
+    "updatedAt": "2025-06-16T17:14:25.331Z"
+  },
+  {
+    "ip": "127.0.0.2",
+    "userAgent": "Chrome",
+    "time": "2025-06-16T17:32:09.257Z",
+    "visitedCount": 1,
+    "id": "8ef36669-8ab5-4616-8ce8-d619bd8c77ea",
+    "createdAt": "2025-06-16T17:32:09.258Z",
+    "updatedAt": "2025-06-16T17:32:09.258Z"
+  }
+]

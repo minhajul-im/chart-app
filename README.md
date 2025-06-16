@@ -1,1 +1,3 @@
-# Inventory Management Project
+# Chart App
+
+### like fun project
