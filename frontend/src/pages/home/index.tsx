@@ -1,5 +1,7 @@
 import { StoreLog } from "./storeLog";
 import { ShowLog } from "./showLog";
+import { ImagesShow } from "./images";
+import { StoreImages } from "./storeImage";
 
 export const HomePage = () => {
   return (
@@ -7,6 +9,10 @@ export const HomePage = () => {
       <StoreLog />
 
       <ShowLog />
+
+      <StoreImages />
+
+      <ImagesShow />
     </div>
   );
 };
