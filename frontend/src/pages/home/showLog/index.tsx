@@ -15,7 +15,11 @@ import type { LogType } from "../../../interface/logType";
 export const ShowLog = () => {
   const { data, isLoading } = useGetLogs();
 
-  const logs = data?.data;
+  if (isLoading) return <h1>Loading...</h1>;
+
+  if (!data) return <h1>Loading...</h1>;
+
+  const logs = data.data;
 
   return (
     <div>
@@ -58,7 +62,7 @@ export const ShowLog = () => {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={3}>Total Logs: {data?.length || 0}</TableCell>
+              <TableCell colSpan={3}>Total Logs: {logs?.length || 0}</TableCell>
             </TableRow>
           </TableFooter>
         </Table>
