@@ -1,10 +1,13 @@
 import cors from "cors";
 import express from "express";
+import path from "path";
 
 import logRoutes from "./routes/logRoutes.js";
 import monitorRoutes from "./routes/monitorRoutes.js";
+import imageRoutes from "./routes/imageRoutes.js";
 import { storeMonitor } from "./controllers/monitorController.js";
 import { validateHeaders } from "./middlewares/headerValidator.js";
+import { multerFileError } from "./errors/multer.js";
 
 const app = express();
 
@@ -16,8 +19,12 @@ storeMonitor();
 
 app.use(validateHeaders);
 
+app.use("/assets", express.static(path.join(process.cwd(), "uploads")));
 app.use("/v1/api", logRoutes);
 app.use("/v1/api", monitorRoutes);
+app.use("/v1/api", imageRoutes);
+
+app.use(multerFileError);
 
 const PORT = process.env.PORT || 3000;
 

@@ -6,6 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const LOG_PATH = path.join(__dirname, "../../db/logs.json");
 const MONITOR_PATH = path.join(__dirname, "../../db/monitor.json");
+const IMAGES_PATH = path.join(__dirname, "../../db/images.json");
 
 const initLogsFile = async (PATH) => {
   try {
@@ -54,5 +55,24 @@ export const readFileMonitors = async () => {
   await initLogsFile(MONITOR_PATH);
 
   const data = await fs.readFile(MONITOR_PATH, "utf-8");
+  return JSON.parse(data);
+};
+
+// File Services
+export const saveFileImages = async (images) => {
+  await initLogsFile(IMAGES_PATH);
+
+  const data = await fs.readFile(IMAGES_PATH, "utf-8");
+  const db = JSON.parse(data);
+
+  images?.forEach((img) => db.push(img));
+
+  await fs.writeFile(IMAGES_PATH, JSON.stringify(db, null, 2));
+};
+
+export const readFileImages = async () => {
+  await initLogsFile(IMAGES_PATH);
+
+  const data = await fs.readFile(IMAGES_PATH, "utf-8");
   return JSON.parse(data);
 };
