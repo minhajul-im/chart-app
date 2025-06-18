@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 storeMonitor();
 
-app.use(validateHeaders);
+app.use("/v1/api", validateHeaders);
 
 app.use("/assets", express.static(path.join(process.cwd(), "uploads")));
 app.use("/v1/api", logRoutes);
