@@ -1,1 +1,1 @@
-export const logs_end_point = "/logs";
+export const logs_route = "/logs";

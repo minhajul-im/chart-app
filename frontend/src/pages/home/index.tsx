@@ -1,7 +1,12 @@
-import { useGetLogs } from "../../api/hooks/logs/useGetLogs";
+import { StoreLog } from "./storeLog";
+import { ShowLog } from "./showLog";
 
 export const HomePage = () => {
-  const { data } = useGetLogs();
-  console.log("Logs Data:", data);
-  return <div>{JSON.stringify(data)}</div>;
+  return (
+    <div className="container mx-auto p-6">
+      <StoreLog />
+
+      <ShowLog />
+    </div>
+  );
 };
