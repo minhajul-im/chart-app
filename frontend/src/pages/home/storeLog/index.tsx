@@ -1,5 +1,5 @@
 import { useStoreLog } from "../../../api/hooks/logs/useStoreLog";
-import InputField from "../../../components/common/input";
+import InputField from "../../../components/common/input-field";
 import { Card } from "../../../components/ui/card";
 import { storeLog } from "../../../controllers/logController";
 import { useLogForm, type postDataType } from "../../../hooks/log/useLogForm";
