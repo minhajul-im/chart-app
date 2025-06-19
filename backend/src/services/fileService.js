@@ -7,8 +7,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LOG_PATH = path.join(__dirname, "../../db/logs.json");
 const MONITOR_PATH = path.join(__dirname, "../../db/monitor.json");
 const IMAGES_PATH = path.join(__dirname, "../../db/images.json");
+const USER_PATH = path.join(__dirname, "../../db/users.json");
 
-const initLogsFile = async (PATH) => {
+const initFile = async (PATH) => {
   try {
     await fs.access(PATH);
   } catch (error) {
@@ -18,7 +19,7 @@ const initLogsFile = async (PATH) => {
 
 // Log Service
 export const saveFileLog = async (newLog) => {
-  await initLogsFile(LOG_PATH);
+  await initFile(LOG_PATH);
 
   const data = await fs.readFile(LOG_PATH, "utf-8");
   const db = JSON.parse(data);
@@ -29,7 +30,7 @@ export const saveFileLog = async (newLog) => {
 };
 
 export const readFileLogs = async () => {
-  await initLogsFile(LOG_PATH);
+  await initFile(LOG_PATH);
 
   const data = await fs.readFile(LOG_PATH, "utf-8");
   return JSON.parse(data);
@@ -41,7 +42,7 @@ export const updateFileLog = async (data) => {
 
 // Monitor Service
 export const saveFileMonitor = async (newMonitor) => {
-  await initLogsFile(MONITOR_PATH);
+  await initFile(MONITOR_PATH);
 
   const data = await fs.readFile(MONITOR_PATH, "utf-8");
   const db = JSON.parse(data);
@@ -52,7 +53,7 @@ export const saveFileMonitor = async (newMonitor) => {
 };
 
 export const readFileMonitors = async () => {
-  await initLogsFile(MONITOR_PATH);
+  await initFile(MONITOR_PATH);
 
   const data = await fs.readFile(MONITOR_PATH, "utf-8");
   return JSON.parse(data);
@@ -60,7 +61,7 @@ export const readFileMonitors = async () => {
 
 // File Services
 export const saveFileImages = async (images) => {
-  await initLogsFile(IMAGES_PATH);
+  await initFile(IMAGES_PATH);
 
   const data = await fs.readFile(IMAGES_PATH, "utf-8");
   const db = JSON.parse(data);
@@ -71,8 +72,31 @@ export const saveFileImages = async (images) => {
 };
 
 export const readFileImages = async () => {
-  await initLogsFile(IMAGES_PATH);
+  await initFile(IMAGES_PATH);
 
   const data = await fs.readFile(IMAGES_PATH, "utf-8");
+  return JSON.parse(data);
+};
+
+// User Services
+export const saveFileUser = async (user) => {
+  await initFile(USER_PATH);
+
+  const data = await fs.readFile(USER_PATH, "utf-8");
+  const db = JSON.parse(data);
+
+  db.push(user);
+
+  await fs.writeFile(USER_PATH, JSON.stringify(db, null, 2));
+};
+
+export const updateFileUser = async (users) => {
+  await fs.writeFile(USER_PATH, JSON.stringify(users, null, 2));
+};
+
+export const readFileUsers = async () => {
+  await initFile(USER_PATH);
+
+  const data = await fs.readFile(USER_PATH, "utf-8");
   return JSON.parse(data);
 };
