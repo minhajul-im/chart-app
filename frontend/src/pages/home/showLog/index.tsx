@@ -15,12 +15,6 @@ import type { LogType } from "../../../interface/logType";
 export const ShowLog = () => {
   const { data, isLoading } = useGetLogs();
 
-  if (isLoading) return <h1>Loading...</h1>;
-
-  if (!data) return <h1>Loading...</h1>;
-
-  const logs = data.data;
-
   return (
     <div>
       <h1 className="text-2xl font-bold mb-6">Recent Logs</h1>
@@ -42,7 +36,8 @@ export const ShowLog = () => {
                 <TableCell colSpan={3}>Loading...</TableCell>
               </TableRow>
             ) : (
-              logs.map((log: LogType) => (
+              data &&
+              data.data?.map((log: LogType) => (
                 <TableRow key={log.id}>
                   <TableCell>{log.ip}</TableCell>
                   <TableCell>{log.userAgent}</TableCell>
@@ -62,7 +57,9 @@ export const ShowLog = () => {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={3}>Total Logs: {logs?.length || 0}</TableCell>
+              <TableCell colSpan={3}>
+                Total Logs: {data?.data?.length || 0}
+              </TableCell>
             </TableRow>
           </TableFooter>
         </Table>
