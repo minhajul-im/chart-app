@@ -12,6 +12,7 @@ import {
   signInSchema,
   signUpSchema,
 } from "../validations/userSchema.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 export const signUpUser = async (req, res) => {
   const { error, value } = signUpSchema.validate(req.body);
@@ -199,5 +200,16 @@ export const resetPassword = async (req, res) => {
       },
     },
     message: "Password reset successful",
+  });
+};
+
+export const signOut = (req, res, next) => {
+  authMiddleware(req, res, next);
+
+  return res.status(200).json({
+    status: true,
+    code: 200,
+    message: "Sign out successful",
+    data: null,
   });
 };

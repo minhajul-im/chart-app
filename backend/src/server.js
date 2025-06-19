@@ -10,6 +10,7 @@ import authRoutes from "./routes/authRoutes.js";
 import { multerFileError } from "./errors/multer.js";
 import { storeMonitor } from "./controllers/monitorController.js";
 import { validateHeaders } from "./middlewares/headerValidator.js";
+import { authMiddleware } from "./middlewares/authMiddleware.js";
 
 const app = express();
 
@@ -22,10 +23,12 @@ storeMonitor();
 app.use("/v1/api", validateHeaders);
 
 app.use("/assets", express.static(path.join(process.cwd(), "uploads")));
-app.use("/v1/api", logRoutes);
-app.use("/v1/api", monitorRoutes);
-app.use("/v1/api", imageRoutes);
+
 app.use("/v1/api/auth", authRoutes);
+
+app.use("/v1/api", authMiddleware, logRoutes);
+app.use("/v1/api", authMiddleware, monitorRoutes);
+app.use("/v1/api", authMiddleware, imageRoutes);
 
 app.use(multerFileError);
 
