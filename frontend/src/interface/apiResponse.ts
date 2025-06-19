@@ -13,28 +13,7 @@ export interface ApiResponse<T = unknown> {
 
 export type imageResponseType = ApiResponse<string[]> | null;
 export type logResponseType = ApiResponse<LogType[]> | null;
-
-export type signupResponseType = ApiResponse<{
-  token: string;
-  user: {
-    id: string;
-    username: string;
-    email: string;
-    createdAt: string;
-  };
-  message?: string;
-}> | null;
-
-export type signinResponseType = ApiResponse<{
-  token: string;
-  user: {
-    id: string;
-    username: string;
-    email: string;
-    createdAt: string;
-  };
-  message?: string;
-}> | null;
+export type signoutResponseType = ApiResponse<{ data: null }> | null;
 
 export type authResponseType = ApiResponse<{
   token: string;

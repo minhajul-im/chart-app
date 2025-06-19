@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getLocalStorage } from "../helper/helper";
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -19,7 +20,8 @@ axiosClient.interceptors.request.use(
       config.headers["Content-Type"] = "application/json";
     }
 
-    const token = localStorage.getItem("token") || null;
+    const token = getLocalStorage("token") || null;
+
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
