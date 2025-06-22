@@ -7,6 +7,7 @@ import monitorRoutes from "./routes/monitorRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
 
 import { multerFileError } from "./errors/multer.js";
 import { storeMonitor } from "./controllers/monitorController.js";
@@ -27,6 +28,7 @@ app.use("/assets", express.static(path.join(process.cwd(), "uploads")));
 
 app.use("/v1/api/auth", authRoutes);
 app.use("/v1/api", userRoutes);
+app.use("/v1/api", postRoutes);
 
 app.use("/v1/api", authMiddleware, logRoutes);
 app.use("/v1/api", authMiddleware, monitorRoutes);
